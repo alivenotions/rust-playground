@@ -1,5 +1,6 @@
 // importing io library from the standard library
 // this is for doing input/output operations
+use rand::Rng;
 use std::io;
 
 // fn declares a function and main is the entrypoint
@@ -7,6 +8,10 @@ use std::io;
 fn main() {
     // println! is a macro and NOT a function
     println!("Guess the number!");
+
+    let secret_number = rand::thread_rng().gen_range(1, 10);
+
+    println!("The secret number is: {}", secret_number);
 
     println!("Please input your guess");
 
