@@ -1,4 +1,36 @@
+fn returns_five() -> u8 {
+    5
+}
+
 fn main() {
+    // These parantheses create a block with a new scope and exp_var
+    // is expecting a value to be returned from that block.
+    let exp_var = {
+        let x = 12;
+        // omitting a semi-colon turns this into an
+        // expression from a statment. Unlike a function
+        // you can't use a return keyword.
+        x + 12
+    };
+
+    // if is an expression and not a statement in rust.
+    let if_else_var = if exp_var == 20 {
+        println!("Inside an if condition");
+        1
+    } else if exp_var == 24 {
+        println!("inside if else");
+        -1
+    } else {
+        println!("Inside an else condition");
+        0
+    };
+    println!("The value of if_else_var: {}", if_else_var);
+
+    println!("The value of exp_var: {:?}", exp_var);
+
+    let return_val = another_rogue_function(70) + returns_five();
+    println!("The returned val from the function: {}", return_val);
+
     let x = 2;
     println!("The value of x is {}", x);
     // We are shadowing the variable and changing
@@ -46,4 +78,13 @@ fn main() {
     // Need to include :? inside the formatter parens to print an array.
     // TODO: Need to find why we need to do that.
     println!("The first element in the array is: {:?}", first_array);
+}
+
+fn another_rogue_function(number: u8) -> u8 {
+    println!("I am a rogue function that prints whatever it wants");
+    println!(
+        "and oh yeah! I print the number that's passed to me: {}",
+        number
+    );
+    42
 }
