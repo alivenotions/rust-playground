@@ -71,6 +71,13 @@ fn main() {
 
     println!("s7: {}, s8: {}", s7, s8);
     // println!("s9: {}, s10: {}", s9, s10);
+
+    let s11 = String::from("Welcome machine");
+    let welcome = &s11[..7];
+    let machine = &s11[8..];
+
+    println!("s11: {}", s11);
+    println!("{} {}", welcome, machine);
 } // x is not valid from here onwards as it is out of the scope.
 
 fn add_exclamation_point(s: &mut String) {
