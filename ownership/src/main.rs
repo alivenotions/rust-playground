@@ -50,7 +50,41 @@ fn main() {
     // int_to_pass is still available because int_to_pass
     // was copied and not moved.
     println!("int_to_pass from main: {}", int_to_pass);
+
+    let s5 = String::from("Reference game");
+    let s5_len = calculate_length(&s5);
+    println!("s5: {}, s5_length: {}", s5, s5_len);
+
+    let mut s6 = String::from("Hello");
+    add_exclamation_point(&mut s6);
+    // mixing references is not a good idea and the compiler
+    // will shout at you if you do so. Immutable references
+    // can be borrowed as many times as possible but if the
+    // same data is borrowed mutably also then it will be a
+    // compiler error. If you want to borrow it mutably only
+    // then you won't be able to borrow it again in the same
+    // scope. This is to ensure that there are no race conditions.
+    let s7 = &s6;
+    let s8 = &s6;
+    // let s9 = &mut s6;
+    // let s10 = &mut s6;
+
+    println!("s7: {}, s8: {}", s7, s8);
+    // println!("s9: {}, s10: {}", s9, s10);
 } // x is not valid from here onwards as it is out of the scope.
+
+fn add_exclamation_point(s: &mut String) {
+    s.push_str("!")
+}
+
+// string is a reference to a String.
+// This concept of parameters being references is called
+// borrowing in Rust. You can't modify something that
+// is borrowed.
+fn calculate_length(string: &String) -> usize {
+    string.len()
+} // here string goes out of scope, but since it does not
+  // have ownership of the value, nothing really happens.
 
 fn takes_ownership(some_string: String) {
     println!("This is some_string; {}", some_string);
